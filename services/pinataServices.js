@@ -1,6 +1,7 @@
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
+require('dotenv').config();
 
 const pinFileToIPFS = async (filePath, fileName) => {
   const formData = new FormData();
@@ -22,4 +23,6 @@ const pinFileToIPFS = async (filePath, fileName) => {
   }
 };
 
-module.exports = pinFileToIPFS;
+module.exports = {
+  pinFileToIPFS,
+};

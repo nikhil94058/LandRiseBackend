@@ -1,6 +1,8 @@
 const NFT = require('../model/nftModels');
-const pinFileToIPFS = require('../services/pinataServices');
+const pinataServices = require('../services/pinataServices');
 const fs = require('fs');
+
+const { pinFileToIPFS } = pinataServices;// Ensure correct import
 
 exports.uploadNFT = async (req, res) => {
   try {
@@ -29,7 +31,7 @@ exports.uploadNFT = async (req, res) => {
     const nft = new NFT(nftData);
     await nft.save();
 
-    res.json({ ipfsHash: nftData.tokenURI });
+    res.status(200).json({ ipfsHash: nftData.tokenURI });
   } catch (error) {
     res.status(500).json({ error: error.message });
   } finally {

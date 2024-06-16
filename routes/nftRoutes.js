@@ -10,7 +10,7 @@ const upload = multer({ dest: 'uploads/' });
 router.post(
   '/upload',
   authenticateToken, // Authenticate first
-  authorizeRole('admin'), // Then authorize
+  // authorizeRole('admin'), // Then authorize
   upload.fields([
     { name: 'image', maxCount: 1 },
     { name: 'adharcard', maxCount: 1 },
