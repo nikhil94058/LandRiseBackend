@@ -1,8 +1,8 @@
 const NFT = require('../model/nftModels');
-const pinataServices = require('../services/pinataServices');
+const pinataServices = require('../services/nftServices');
 const fs = require('fs');
-
-const { pinFileToIPFS } = pinataServices;// Ensure correct import
+const { buyNft } = require('../services/nftServices');
+const { pinFileToIPFS } = pinataServices; // Ensure correct import
 
 exports.uploadNFT = async (req, res) => {
   try {
@@ -44,6 +44,19 @@ exports.getNFTs = async (req, res) => {
     const nfts = await NFT.find();
     res.json({ nfts });
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.buyNftController = async (req, res) => {
+  const { nftId } = req.params;
+  const { paymentMethodId, newOwnerName, newOwnerAddress } = req.body;
+
+  try {
+    const result = await buyNft(nftId, paymentMethodId, newOwnerName, newOwnerAddress);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };

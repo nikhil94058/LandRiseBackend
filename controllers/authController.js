@@ -31,7 +31,7 @@ const signup = async (req, res) => {
     const newUser = new User({ email, password: hashedPassword, role });
 
     await newUser.save();
-    res.status(201).json('User registered');
+    res.status(201).json('exist');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

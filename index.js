@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const nftRoutes = require('./routes/nftRoutes'); // Import nftRoutes
 const authRoutes = require('./routes/authRoutes'); // Import authRoutes
+const genRoutes = require('./routes/genRoutes');
 const { authenticateToken, authorizeRole } = require('./middleware/auth'); // Import middleware
 const path = require("path");
 dotenv.config(); // Load environment variables
@@ -37,7 +38,7 @@ mongoose.connection.on('error', (err) => {
 // Routes
 app.use('/api', nftRoutes); // Use nftRoutes under /api
 app.use('/auth', authRoutes); // Use authRoutes under /auth
-
+app.use('/general', genRoutes); // use General Purpose like review etc;
 
 
 // Error handling middleware
